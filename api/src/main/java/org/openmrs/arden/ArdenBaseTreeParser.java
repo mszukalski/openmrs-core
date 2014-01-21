@@ -323,7 +323,12 @@ public class ArdenBaseTreeParser extends antlr.TreeParser implements ArdenBaseTr
 											duration_op(_t);
 											_t = _retTree;
 										}
-										System.err.println("Duration Clause - " + intlit.getText() + " " + dop.getText());
+										if (dop != null) {
+											System.err
+											        .println("Duration Clause - " + intlit.getText() + " " + dop.getText());
+										} else {
+											System.err.println("Duration Clause - " + intlit.getText());
+										}
 									}
 									break;
 								}
@@ -1018,8 +1023,13 @@ public class ArdenBaseTreeParser extends antlr.TreeParser implements ArdenBaseTr
 									duration_op(_t);
 									_t = _retTree;
 								}
-								obj.setDuration("past", m.getText(), n.getText(), key);
-								System.err.println("Duration Clause - " + m.getText() + " " + n.getText());
+								if (n != null) {
+									obj.setDuration("past", m.getText(), n.getText(), key);
+									System.err.println("Duration Clause - " + m.getText() + " " + n.getText());
+								} else {
+									obj.setDuration("past", m.getText(), "", key);
+									System.err.println("Duration Clause - " + m.getText() + " " + "");
+								}
 								break;
 							}
 							case COUNT:
